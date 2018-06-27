@@ -1,18 +1,9 @@
 {
-  "Mac" : [
-
-  ],
-  "watchOS" : [
-
-  ],
-  "tvOS" : [
-
-  ],
   "commitish" : "1.2.1",
   "iOS" : [
     {
       "name" : "JVFloatLabeledText",
-      "hash" : "e0c018b1f85785b4403afde80d69e6f9ced1c9d07e7c30057ee70b34693cd750"
+      "hash" : "89ac120f08a569fd81f7bb2678f29aafb184594f55a39a732316976b909817e0"
     }
   ]
 }
