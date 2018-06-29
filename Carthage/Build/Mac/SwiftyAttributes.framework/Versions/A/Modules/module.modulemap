@@ -1,0 +1,11 @@
+framework module SwiftyAttributes {
+  umbrella header "SwiftyAttributes.h"
+
+  export *
+  module * { export * }
+}
+
+module SwiftyAttributes.Swift {
+    header "SwiftyAttributes-Swift.h"
+    requires objc
+}
