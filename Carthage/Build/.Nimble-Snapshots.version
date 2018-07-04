@@ -1,21 +1,9 @@
 {
-  "Mac" : [
-
-  ],
-  "watchOS" : [
-
-  ],
-  "tvOS" : [
-    {
-      "name" : "Nimble_Snapshots",
-      "hash" : "bf5b4d427c345b5aced014cc16ebdf3270fb8f6458b442042b4c106c298e39e1"
-    }
-  ],
-  "commitish" : "6.3.0",
+  "commitish" : "6.7.1",
   "iOS" : [
     {
       "name" : "Nimble_Snapshots",
-      "hash" : "9826dc7f06bc8946255c559e894240f767c24b99a4ea726692a28452be5fa7fd"
+      "hash" : "1ff28ee21ec3a151d143cccc024f440a291a2de5468d89a1f96019a0b3546c0c"
     }
   ]
 }

@@ -1,21 +1,9 @@
 {
-  "Mac" : [
-
-  ],
-  "watchOS" : [
-    {
-      "name" : "FontAwesome",
-      "hash" : "9ed4cf2aad76a74873e0f4e277c35c654b4728184bb663ace33a2be3a247a798"
-    }
-  ],
-  "tvOS" : [
-
-  ],
   "commitish" : "1.3.2",
   "iOS" : [
     {
       "name" : "FontAwesome",
-      "hash" : "cb686446ac50cbf11ae026f132e55e887eec1d1f11d987bbebf36f64bd5ec17e"
+      "hash" : "2fa2dfac23e85b4c494ef629ab132af548a9a9b82c84e571e340b90bef8ba11f"
     }
   ]
 }
