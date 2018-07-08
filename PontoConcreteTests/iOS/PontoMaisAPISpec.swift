@@ -19,8 +19,8 @@ class PontoMaisAPISpec: QuickSpec {
         var sut: PontoMaisAPI!
         
         beforeEach {
-            let endpointClosure = { (target: PontoMaisRoute) -> Endpoint<PontoMaisRoute> in
-                return Endpoint<PontoMaisRoute>(url: URL(target: target).absoluteString,
+            let endpointClosure = { (target: PontoMaisRoute) -> Endpoint in
+                return Endpoint(url: URL(target: target).absoluteString,
                                                 sampleResponseClosure: {
                                                     return .networkResponse(200, target.sampleData)
                 }, method: target.method, task: target.task, httpHeaderFields: target.headers)
@@ -61,8 +61,8 @@ class PontoMaisAPISpec: QuickSpec {
                 }
                 context("error") {
                     beforeEach {
-                        let endpointClosure = { (target: PontoMaisRoute) -> Endpoint<PontoMaisRoute> in
-                            return Endpoint<PontoMaisRoute>(url: URL(target: target).absoluteString,
+                        let endpointClosure = { (target: PontoMaisRoute) -> Endpoint in
+                            return Endpoint(url: URL(target: target).absoluteString,
                                                             sampleResponseClosure: {
                                                                 return .networkError(NSError())
                             }, method: target.method, task: target.task, httpHeaderFields: target.headers)
@@ -146,8 +146,8 @@ class PontoMaisAPISpec: QuickSpec {
                     context("Request"){
                         
                         beforeEach {
-                            let endpointClosure = { (target: PontoMaisRoute) -> Endpoint<PontoMaisRoute> in
-                                return Endpoint<PontoMaisRoute>(url: URL(target: target).absoluteString,
+                            let endpointClosure = { (target: PontoMaisRoute) -> Endpoint in
+                                return Endpoint(url: URL(target: target).absoluteString,
                                                                 sampleResponseClosure: {
                                                                     return .networkError(NSError())
                                 }, method: target.method, task: target.task, httpHeaderFields: target.headers)
