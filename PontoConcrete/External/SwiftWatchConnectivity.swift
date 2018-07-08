@@ -1,20 +1,12 @@
-//
-//  SwiftWatchConnectivity.swift
-//
-//  Created by Matsuo Keisuke on 10/9/17.
-//  Copyright © 2017 Keisuke Matsuo. All rights reserved.
-//
-
 import Foundation
-import WatchKit
 import WatchConnectivity
+import WatchKit
 
 public protocol SwiftWatchConnectivityDelegate: NSObjectProtocol {
     func connectivity(_ swiftWatchConnectivity: SwiftWatchConnectivity, updatedWithTask task: SwiftWatchConnectivity.Task)
 }
 
 public class SwiftWatchConnectivity: NSObject {
-
     public enum Task {
         case updateApplicationContext([String: Any])
         case transferUserInfo([String: Any])
@@ -29,8 +21,8 @@ public class SwiftWatchConnectivity: NSObject {
     /// MARK: Public Properties
     public weak var delegate: SwiftWatchConnectivityDelegate? {
         didSet {
-            invoke()
-            invokeReceivedTasks()
+            self.invoke()
+            self.invokeReceivedTasks()
         }
     }
 
@@ -39,7 +31,7 @@ public class SwiftWatchConnectivity: NSObject {
     fileprivate var receivedTasks: [Task] = []
     fileprivate var activationState: WCSessionActivationState = .notActivated
     #if os(watchOS)
-    fileprivate var backgroundTasks: [WKRefreshBackgroundTask] = []
+        fileprivate var backgroundTasks: [WKRefreshBackgroundTask] = []
     #endif
 
     /**
@@ -47,19 +39,19 @@ public class SwiftWatchConnectivity: NSObject {
      */
     fileprivate var isAvailableMessage: Bool {
         guard WCSession.default.isReachable else { return false }
-        guard activationState == .activated else { return false }
+        guard self.activationState == .activated else { return false }
         return true
     }
 
     fileprivate var isAvailableApplicationContext: Bool {
         guard WCSession.default.isReachable else { return false }
-        guard activationState == .activated else { return false }
+        guard self.activationState == .activated else { return false }
         return true
     }
 
     fileprivate var isAvailableTransferUserInfo: Bool {
         guard WCSession.default.isReachable else { return false }
-        guard activationState == .activated else { return false }
+        guard self.activationState == .activated else { return false }
         return true
     }
 
@@ -75,70 +67,71 @@ public class SwiftWatchConnectivity: NSObject {
     /// MARK: Type Methods
     /// MARK: Public Methods
     public func updateApplicationContext(context: [String: Any]) {
-        tasks.append(.updateApplicationContext(context))
-        invoke()
+        self.tasks.append(.updateApplicationContext(context))
+        self.invoke()
     }
+
     public func transferUserInfo(userInfo: [String: Any]) {
-        tasks.append(.transferUserInfo(userInfo))
-        invoke()
+        self.tasks.append(.transferUserInfo(userInfo))
+        self.invoke()
     }
 
     public func transferFile(fileURL: URL, metadata: [String: Any]) {
-        tasks.append(.transferFile(fileURL, metadata))
-        invoke()
+        self.tasks.append(.transferFile(fileURL, metadata))
+        self.invoke()
     }
 
     public func sendMesssage(message: [String: Any]) {
-        tasks.append(.sendMessage(message))
-        invoke()
+        self.tasks.append(.sendMessage(message))
+        self.invoke()
     }
 
     public func sendMesssageData(data: Data) {
-        tasks.append(.sendMessageData(data))
-        invoke()
+        self.tasks.append(.sendMessageData(data))
+        self.invoke()
     }
 
     /// MARK: Private Methods
     private func invoke() {
-        guard activationState == .activated else { return }
-        guard delegate != nil else { return }
+        guard self.activationState == .activated else { return }
+        guard self.delegate != nil else { return }
 
         var remainTasks: [Task] = []
-        for task in tasks {
+        for task in self.tasks {
             switch task {
-            case .updateApplicationContext(let context):
+            case let .updateApplicationContext(context):
                 guard isAvailableApplicationContext else {
                     remainTasks.append(task)
                     continue
                 }
-                invokeUpdateApplicationContext(context)
-            case .transferUserInfo(let userInfo):
+                self.invokeUpdateApplicationContext(context)
+            case let .transferUserInfo(userInfo):
                 guard isAvailableTransferUserInfo else {
                     remainTasks.append(task)
                     continue
                 }
-                invokeTransferUserInfo(userInfo)
-            case .transferFile(let fileURL, let medatada):
+                self.invokeTransferUserInfo(userInfo)
+            case let .transferFile(fileURL, medatada):
                 guard isAvailableTransferUserInfo else {
                     remainTasks.append(task)
                     continue
                 }
-                invokeTransferFile(fileURL, medatada: medatada)
-            case .sendMessage(let message):
+                self.invokeTransferFile(fileURL, medatada: medatada)
+            case let .sendMessage(message):
                 guard isAvailableMessage else {
                     remainTasks.append(task)
                     continue
                 }
-                invokeSendMessage(message)
-            case .sendMessageData(let data):
+                self.invokeSendMessage(message)
+            case let .sendMessageData(data):
                 guard isAvailableMessage else {
                     remainTasks.append(task)
                     continue
                 }
-                invokeSendMessageData(data)
+                self.invokeSendMessageData(data)
             }
         }
-        tasks.removeAll()
+        self.tasks.removeAll()
         remainTasks.forEach({ tasks.append($0) })
     }
 
@@ -159,17 +152,17 @@ public class SwiftWatchConnectivity: NSObject {
     }
 
     private func invokeSendMessage(_ message: [String: Any]) {
-        WCSession.default.sendMessage(message, replyHandler: { (reply) in
+        WCSession.default.sendMessage(message, replyHandler: { reply in
             print("reply: \(reply)")
-        }, errorHandler: { (error) in
+        }, errorHandler: { error in
             print("error: \(error)")
         })
     }
 
     private func invokeSendMessageData(_ data: Data) {
-        WCSession.default.sendMessageData(data, replyHandler: { (reply) in
+        WCSession.default.sendMessageData(data, replyHandler: { reply in
             print("reply: \(reply)")
-        }, errorHandler: { (error) in
+        }, errorHandler: { error in
             print("error: \(error)")
         })
     }
@@ -201,22 +194,22 @@ public class SwiftWatchConnectivity: NSObject {
                     break
                 }
             }
-            completeAllTasksIfReady()
+            self.completeAllTasksIfReady()
         }
 
         public func completeAllTasksIfReady() {
             let session = WCSession.default
             // the session's properties only have valid values if the session is activated, so check that first
             if session.activationState == .activated && !session.hasContentPending {
-                backgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(false) }
-                backgroundTasks.removeAll()
+                self.backgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(false) }
+                self.backgroundTasks.removeAll()
             }
         }
     }
 #endif
 
 extension SwiftWatchConnectivity: WCSessionDelegate {
-    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    public func session(_: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         if let error = error {
             print(error)
             return
@@ -224,36 +217,41 @@ extension SwiftWatchConnectivity: WCSessionDelegate {
         print("activationState: \(activationState.rawValue)")
         self.activationState = activationState
     }
+
     #if os(iOS)
-    public func sessionDidDeactivate(_ session: WCSession) {
-        activationState = .notActivated
-        print("deactivated")
-    }
-    public func sessionDidBecomeInactive(_ session: WCSession) {
-        activationState = .inactive
-        print("inactivated")
-    }
+        public func sessionDidDeactivate(_: WCSession) {
+            self.activationState = .notActivated
+            print("deactivated")
+        }
+
+        public func sessionDidBecomeInactive(_: WCSession) {
+            self.activationState = .inactive
+            print("inactivated")
+        }
     #endif
-    public func sessionReachabilityDidChange(_ session: WCSession) {
+    public func sessionReachabilityDidChange(_: WCSession) {
         //        isReachable = session.isReachable
     }
 
-    public func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+    public func session(_: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
         print("applicationContext: \(applicationContext)")
-        receivedTasks.append(.updateApplicationContext(applicationContext))
-        invokeReceivedTasks()
+        self.receivedTasks.append(.updateApplicationContext(applicationContext))
+        self.invokeReceivedTasks()
     }
-    public func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
+
+    public func session(_: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
         print("userInfo: \(userInfo)")
-        receivedTasks.append(.transferUserInfo(userInfo))
-        invokeReceivedTasks()
+        self.receivedTasks.append(.transferUserInfo(userInfo))
+        self.invokeReceivedTasks()
     }
-    public func session(_ session: WCSession, didReceive file: WCSessionFile) {
+
+    public func session(_: WCSession, didReceive file: WCSessionFile) {
         print("receiveFile: \(file)")
-        receivedTasks.append(.transferFile(file.fileURL, file.metadata))
-        invokeReceivedTasks()
+        self.receivedTasks.append(.transferFile(file.fileURL, file.metadata))
+        self.invokeReceivedTasks()
     }
-    public func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+
+    public func session(_: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
         print("message: \(message)")
         #if os(watchOS)
             let device = "watch"
@@ -264,10 +262,11 @@ extension SwiftWatchConnectivity: WCSessionDelegate {
         replyHandler(["messageReply": "reply from \(device)"])
         invokeReceivedTasks()
     }
-    public func session(_ session: WCSession, didReceiveMessageData messageData: Data, replyHandler: @escaping (Data) -> Void) {
+
+    public func session(_: WCSession, didReceiveMessageData messageData: Data, replyHandler: @escaping (Data) -> Void) {
         print("messageData: \(messageData)")
         replyHandler(Data())
-        receivedTasks.append(.sendMessageData(messageData))
-        invokeReceivedTasks()
+        self.receivedTasks.append(.sendMessageData(messageData))
+        self.invokeReceivedTasks()
     }
 }

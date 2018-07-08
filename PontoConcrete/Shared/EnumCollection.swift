@@ -1,11 +1,3 @@
-//
-//  EnumCollection.swift
-//  PontoConcrete
-//
-//  Created by Douglas Medeiros on 17/12/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
 import Foundation
 
 protocol EnumCollection: Hashable {
@@ -14,7 +6,6 @@ protocol EnumCollection: Hashable {
 }
 
 extension EnumCollection {
-    
     static func cases() -> AnySequence<Self> {
         return AnySequence { () -> AnyIterator<Self> in
             var raw = 0
@@ -28,8 +19,8 @@ extension EnumCollection {
             }
         }
     }
-    
+
     static var allValues: [Self] {
-        return Array(self.cases())
+        return Array(cases())
     }
 }

@@ -1,17 +1,9 @@
-//
-//  Point.swift
-//  PontoConcrete
-//
-//  Created by Douglas Brito de Medeiros on 11/11/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
-import Foundation
 import CoreLocation
+import Foundation
 
 public enum Point: String, EnumCollection {
     case saoPaulo, rioDeJaneiro, minasGerais
-    
+
     public func name() -> String {
         switch self {
         case .saoPaulo:
@@ -22,7 +14,7 @@ public enum Point: String, EnumCollection {
             return "Minas Gerais"
         }
     }
-    
+
     func point() -> PointData {
         switch self {
         case .saoPaulo:
@@ -33,11 +25,11 @@ public enum Point: String, EnumCollection {
             return PointData(location: CLLocation(latitude: -19.935331, longitude: -43.929717), address: "Av. Getúlio Vargas, 671 - Savassi, Minas Gerais - MG, Brasil")
         }
     }
-    
+
     func asDict() -> [String: String] {
         return [
             .command: .location,
-            .location: self.rawValue
+            .location: self.rawValue,
         ]
     }
 }

@@ -1,18 +1,9 @@
-//
-//  ExtensionDelegate.swift
-//  PontoConcrete WatchOS Extension
-//
-//  Created by Douglas Medeiros on 19/11/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
 import WatchKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
-        
         SwiftWatchConnectivity.shared.handle(backgroundTasks)
-        
+
         for task in backgroundTasks {
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:

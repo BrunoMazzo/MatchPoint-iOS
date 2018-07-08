@@ -1,23 +1,14 @@
-//
-//  NotificationController.swift
-//  PontoConcrete WatchOS Extension
-//
-//  Created by Douglas Medeiros on 19/11/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
-import WatchKit
 import Foundation
 import UserNotifications
+import WatchKit
 
 class NotificationController: WKUserNotificationInterfaceController {
+    @IBOutlet private(set) var notificationAlertLabel: WKInterfaceLabel?
 
-    @IBOutlet weak private(set) var notificationAlertLabel: WKInterfaceLabel?
-    
     override init() {
         super.init()
     }
-    
+
     override func willActivate() {
         super.willActivate()
     }
@@ -30,5 +21,4 @@ class NotificationController: WKUserNotificationInterfaceController {
         self.notificationAlertLabel?.setText(notification.request.content.body)
         completionHandler(.custom)
     }
-    
 }

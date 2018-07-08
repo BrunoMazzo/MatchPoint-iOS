@@ -1,9 +1,9 @@
 {
   "commitish" : "1.3.2",
-  "iOS" : [
+  "watchOS" : [
     {
       "name" : "FontAwesome",
-      "hash" : "2fa2dfac23e85b4c494ef629ab132af548a9a9b82c84e571e340b90bef8ba11f"
+      "hash" : "7cebc9a6684b94343e6f74196291ca4edfbadcfe2158869879101f6fb7a50383"
     }
   ]
 }

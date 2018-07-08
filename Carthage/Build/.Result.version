@@ -1,9 +1,9 @@
 {
   "commitish" : "3.2.4",
-  "iOS" : [
+  "watchOS" : [
     {
       "name" : "Result",
-      "hash" : "b8245787fb4471e20b2c419d5503a48a45853cc2f4a27cf8d54bbbf12e65a1f8"
+      "hash" : "20e39f91c6e2f54e753f282e15f50535e6b63b78c1ead9b0207b20ebdff76d63"
     }
   ]
 }

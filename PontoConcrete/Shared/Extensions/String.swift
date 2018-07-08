@@ -1,11 +1,3 @@
-//
-//  String.swift
-//  PontoConcrete
-//
-//  Created by Douglas Medeiros on 22/11/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
 import Foundation
 
 extension String {
@@ -18,7 +10,7 @@ extension String {
     static let location = "location"
     static let command = "command"
     static let headquarter = "headquarter"
-    
+
     static let firstLaunch = "firstLaunch"
 }
 

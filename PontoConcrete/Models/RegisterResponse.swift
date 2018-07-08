@@ -12,7 +12,7 @@ struct RegisterResponse: Mappable {
     let path: String?
     let device: Device?
     let appVersion: String?
-    
+
     private enum CodingKeys: String, CodingKey {
         case timeCard = "time_card"
         case path = "_path"

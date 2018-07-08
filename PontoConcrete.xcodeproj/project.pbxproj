@@ -882,13 +882,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A017F3DE1F69B528007BB2FA /* Build configuration list for PBXNativeTarget "PontoConcrete" */;
 			buildPhases = (
+				1DDED0D920F192E9002CB0F6 /* SwiftFormat */,
+				3C0A34CD1FBD184800567391 /* SwiftLint */,
 				A017F3BD1F69B528007BB2FA /* Sources */,
 				A017F3BE1F69B528007BB2FA /* Frameworks */,
 				A017F3BF1F69B528007BB2FA /* Resources */,
 				A017F4081F69C7F1007BB2FA /* Embed App Extensions */,
-				3C0A34CD1FBD184800567391 /* SwiftLint */,
 				3C47A3F11FC2210000EA7EF3 /* Embed Watch Content */,
-				A096377F1FDB2E0000CE3BA6 /* ShellScript */,
+				A096377F1FDB2E0000CE3BA6 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -927,7 +928,7 @@
 				A017F3F31F69C7F0007BB2FA /* Sources */,
 				A017F3F41F69C7F0007BB2FA /* Frameworks */,
 				A017F3F51F69C7F0007BB2FA /* Resources */,
-				A09637801FDB2F2700CE3BA6 /* ShellScript */,
+				A09637801FDB2F2700CE3BA6 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -1094,6 +1095,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1DDED0D920F192E9002CB0F6 /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mint run swiftformat swiftformat PontoConcrete \"PontoConcrete WatchOS\" \"PontoConcrete WatchOS Extension\" --self insert --header strip";
+		};
 		3C0A34CD1FBD184800567391 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1106,9 +1121,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which ${PODS_ROOT}/SwiftLint/swiftlint >/dev/null; then\n    ${PODS_ROOT}/SwiftLint/swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "mint run swiftlint swiftlint";
 		};
-		A096377F1FDB2E0000CE3BA6 /* ShellScript */ = {
+		A096377F1FDB2E0000CE3BA6 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1123,6 +1138,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyAttributes.framework",
 			);
+			name = Carthage;
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Moya.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
@@ -1135,9 +1151,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "mint run carthage carthage copy-frameworks";
 		};
-		A09637801FDB2F2700CE3BA6 /* ShellScript */ = {
+		A09637801FDB2F2700CE3BA6 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1145,12 +1161,13 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 			);
+			name = Carthage;
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "mint run carthage carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 

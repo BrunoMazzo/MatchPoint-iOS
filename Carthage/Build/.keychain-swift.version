@@ -1,9 +1,9 @@
 {
   "commitish" : "11.0.0",
-  "iOS" : [
+  "watchOS" : [
     {
       "name" : "KeychainSwift",
-      "hash" : "9346aa688f4fd035a11e7402e532fddd0330ada53b7e5b87952c12a7d6c2fa49"
+      "hash" : "74fa010ee4e1ec931a4bbe79e5cdade439aafeb68d7d9372b6898f804ce8f3b4"
     }
   ]
 }

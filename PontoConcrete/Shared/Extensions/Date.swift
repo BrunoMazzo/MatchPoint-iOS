@@ -1,11 +1,3 @@
-//
-//  Date.swift
-//  PontoConcrete
-//
-//  Created by Douglas Medeiros on 15/11/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
 import Foundation
 
 extension Date {
@@ -20,9 +12,9 @@ extension Date {
         calendar.timeZone = timeZone
 
         let hour = calendar.component(.hour, from: self)
-        
+
         var message = ""
-        
+
         if hour >= 0 && hour <= 11 {
             message = "Bom Trabalho!"
         } else if hour >= 12 && hour <= 13 {
@@ -32,7 +24,7 @@ extension Date {
         } else if hour >= 17 && hour <= 23 {
             message = "Boa Volta!"
         }
-        
+
         return message.uppercased()
     }
 }

@@ -9,7 +9,9 @@
 
 ## Start
 
-After cloning this repo, you should run ```carthage bootstrap``` to begin working on the project
+We use mint to manage Swift tools dependency. To install it see on [[mint repository](https://github.com/yonaskolb/Mint)]. After installing it, run ```mint bootstrap``` to install all dependencies.
+
+After cloning this repo, you should run ```mint run carthage carthage bootstrap``` to begin working on the project
 
 ## Xcode Server Bots
 

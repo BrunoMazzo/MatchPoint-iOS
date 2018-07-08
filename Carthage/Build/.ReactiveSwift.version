@@ -1,9 +1,9 @@
 {
   "commitish" : "3.1.0",
-  "iOS" : [
+  "watchOS" : [
     {
       "name" : "ReactiveSwift",
-      "hash" : "1950df7446dd3bb9fbcbe78eb0eaee50f60eec9c4db138f85ef8bdbc8c4e1a1a"
+      "hash" : "2eb79fc9b3107848e8b2ae3c8fa45180e7278dbd6520c074573b64b95248cdd5"
     }
   ]
 }

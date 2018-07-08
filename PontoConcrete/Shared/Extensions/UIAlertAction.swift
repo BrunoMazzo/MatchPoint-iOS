@@ -1,11 +1,3 @@
-//
-//  UIAlertAction.swift
-//  PontoConcrete
-//
-//  Created by Douglas Medeiros on 26/11/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
 import UIKit
 
 extension UIAlertAction {

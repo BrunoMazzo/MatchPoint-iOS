@@ -1,14 +1,6 @@
-//
-//  LoginView.swift
-//  PontoConcrete
-//
-//  Created by Douglas Brito de Medeiros on 11/11/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
-import SnapKit
-import JVFloatLabeledText
 import FontAwesome
+import JVFloatLabeledText
+import SnapKit
 
 class LoginView: UIView {
     lazy var backgroundImage: UIImageView = {
@@ -16,20 +8,20 @@ class LoginView: UIView {
         let imageView = UIImageView(image: image)
         return imageView
     }()
-    
+
     lazy var containerView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
         return view
     }()
-    
+
     lazy var logoView: LogoView = {
         let logoView = LogoView()
         logoView.accessibilityLabel = "logotipo"
         logoView.isAccessibilityElement = true
         return logoView
     }()
-    
+
     lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
         let tf = SkyFloatingLabelTextFieldWithIcon(frame: .zero)
         tf.title = "E-mail"
@@ -46,7 +38,7 @@ class LoginView: UIView {
         tf.lineColor = .madison
         tf.selectedTitleColor = .madison
         tf.selectedLineColor = .madison
-        
+
         tf.isAccessibilityElement = true
         tf.accessibilityLabel = "email"
         tf.accessibilityIdentifier = "email"
@@ -59,7 +51,7 @@ class LoginView: UIView {
         tf.autocorrectionType = .no
         return tf
     }()
-    
+
     lazy var passwordTextField: SkyFloatingLabelTextFieldWithIcon = {
         let tf = SkyFloatingLabelTextFieldWithIcon(frame: .zero)
         tf.title = "Senha"
@@ -67,7 +59,7 @@ class LoginView: UIView {
         tf.placeholder = "Senha"
         tf.iconFont = UIFont.fontAwesome(ofSize: 15)
         tf.iconText = "\u{f13e}"
-        
+
         tf.errorColor = .lust
         tf.selectedIconColor = .madison
         tf.placeholderColor = .madison
@@ -77,7 +69,7 @@ class LoginView: UIView {
         tf.lineColor = .madison
         tf.selectedTitleColor = .madison
         tf.selectedLineColor = .madison
-        
+
         tf.isAccessibilityElement = true
         tf.accessibilityLabel = "senha"
         tf.accessibilityIdentifier = "senha"
@@ -90,7 +82,7 @@ class LoginView: UIView {
         tf.autocorrectionType = .no
         return tf
     }()
-    
+
     lazy var incorrectLoginLabel: UILabel = {
         let lb = UILabel(frame: .zero)
         lb.font = UIFont.systemFont(ofSize: 17)
@@ -102,7 +94,7 @@ class LoginView: UIView {
         lb.accessibilityIdentifier = "validator"
         return lb
     }()
-    
+
     lazy var loginButton: UIButton = { () -> UIButton in
         let view = UIButton(frame: .zero)
         view.setTitle("", for: .disabled)
@@ -116,11 +108,11 @@ class LoginView: UIView {
         view.borderColor = .white
         view.borderWidth = 1
         view.cornerRadius = 10
-        
+
         return view
     }()
-    
-    lazy fileprivate(set) var activityIndicator = { () -> UIActivityIndicatorView in
+
+    fileprivate(set) lazy var activityIndicator = { () -> UIActivityIndicatorView in
         let aiv = UIActivityIndicatorView(frame: .zero)
         aiv.hidesWhenStopped = true
         aiv.activityIndicatorViewStyle = .white
@@ -129,13 +121,13 @@ class LoginView: UIView {
         aiv.isAccessibilityElement = true
         return aiv
     }()
-    
+
     public init() {
         super.init(frame: .zero)
         setupViewConfiguration()
     }
-    
-    public required init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -147,24 +139,23 @@ public enum LoginUIState {
 }
 
 extension LoginView {
-    
     func updateUI(state: LoginUIState) {
-        containerView.isUserInteractionEnabled = true
-        activityIndicator.stopAnimating()
-        loginButton.alpha = 1
-        incorrectLoginLabel.text = ""
-        loginButton.isEnabled = true
-        
+        self.containerView.isUserInteractionEnabled = true
+        self.activityIndicator.stopAnimating()
+        self.loginButton.alpha = 1
+        self.incorrectLoginLabel.text = ""
+        self.loginButton.isEnabled = true
+
         switch state {
         case .loading:
-            containerView.isUserInteractionEnabled = false
-            activityIndicator.startAnimating()
-            loginButton.alpha = 0.2
-            incorrectLoginLabel.alpha = 1
-            loginButton.isEnabled = false
+            self.containerView.isUserInteractionEnabled = false
+            self.activityIndicator.startAnimating()
+            self.loginButton.alpha = 0.2
+            self.incorrectLoginLabel.alpha = 1
+            self.loginButton.isEnabled = false
         case .ready:
-            incorrectLoginLabel.alpha = 0
-        case .error(let error):
+            self.incorrectLoginLabel.alpha = 0
+        case let .error(error):
             incorrectLoginLabel.isHidden = false
             incorrectLoginLabel.alpha = 1
             incorrectLoginLabel.text = error
@@ -175,61 +166,61 @@ extension LoginView {
 
 extension LoginView: ViewConfiguration {
     func buildViewHierarchy() {
-        addSubview(containerView)
-        containerView.addSubview(backgroundImage)
-        containerView.addSubview(logoView)
-        containerView.addSubview(emailTextField)
-        containerView.addSubview(passwordTextField)
-        containerView.addSubview(incorrectLoginLabel)
-        containerView.addSubview(activityIndicator)
-        containerView.addSubview(loginButton)
+        addSubview(self.containerView)
+        self.containerView.addSubview(self.backgroundImage)
+        self.containerView.addSubview(self.logoView)
+        self.containerView.addSubview(self.emailTextField)
+        self.containerView.addSubview(self.passwordTextField)
+        self.containerView.addSubview(self.incorrectLoginLabel)
+        self.containerView.addSubview(self.activityIndicator)
+        self.containerView.addSubview(self.loginButton)
     }
-    
+
     func setupConstraints() {
-        backgroundImage.snp.makeConstraints { make in
+        self.backgroundImage.snp.makeConstraints { make in
             make.edges.equalTo(self)
         }
-        
-        containerView.snp.makeConstraints { make in
+
+        self.containerView.snp.makeConstraints { make in
             make.left.top.right.bottom.equalTo(self)
         }
-        
-        logoView.snp.makeConstraints { make in
+
+        self.logoView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(80)
             make.width.equalTo(164)
             make.height.equalTo(105)
         }
-        
+
         self.setupTextFields()
-        
-        activityIndicator.snp.makeConstraints { make in
+
+        self.activityIndicator.snp.makeConstraints { make in
             make.width.height.equalTo(20)
             make.center.equalTo(loginButton)
         }
-        
-        loginButton.snp.makeConstraints { make in
+
+        self.loginButton.snp.makeConstraints { make in
             make.height.equalTo(50)
             make.bottom.left.right.equalTo(0).inset(20)
         }
     }
-    
+
     private func setupTextFields() {
-        emailTextField.snp.makeConstraints { make in
+        self.emailTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(logoView.snp.bottom).offset(50)
             make.width.equalTo(310)
             make.height.equalTo(45)
         }
-        
-        passwordTextField.snp.makeConstraints { make in
+
+        self.passwordTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(emailTextField.snp.bottom).offset(20)
             make.width.equalTo(310)
             make.height.equalTo(45)
         }
-        
-        incorrectLoginLabel.snp.makeConstraints { make in
+
+        self.incorrectLoginLabel.snp.makeConstraints { make in
             make.left.equalTo(passwordTextField.snp.left)
             make.top.equalTo(passwordTextField.snp.bottom).inset(-10)
             make.width.equalTo(276)

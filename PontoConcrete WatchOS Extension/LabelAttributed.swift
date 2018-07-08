@@ -1,11 +1,3 @@
-//
-//  LabelAttributed.swift
-//  PontoConcrete WatchOS Extension
-//
-//  Created by Douglas Medeiros on 20/11/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
 import SwiftyAttributes
 
 public enum LabelAttributed {
@@ -16,11 +8,10 @@ public enum LabelAttributed {
     case loading
     case request
     case permission
-    
+
     func attributed() -> NSAttributedString {
-        
         switch self {
-        case .salutationSuccess(let time):
+        case let .salutationSuccess(time):
             return time.salutation().withFont(.systemFont(ofSize: 24)).withTextColor(.white)
         case .start:
             return "BATER O PONTO".withFont(.systemFont(ofSize: 24)).withTextColor(.white)
@@ -32,7 +23,7 @@ public enum LabelAttributed {
             return "O acesso à localização foi negado, ative-a nas Configurações".withFont(.systemFont(ofSize: 16)).withTextColor(.white)
         case .loading:
             return "Aguarde...".withFont(.systemFont(ofSize: 22)).withTextColor(.white)
-        case .custom(let message):
+        case let .custom(message):
             return message.withFont(.systemFont(ofSize: 16)).withTextColor(.white)
         }
     }

@@ -1,11 +1,3 @@
-//
-//  PointData.swift
-//  PontoConcrete
-//
-//  Created by Douglas Brito de Medeiros on 12/11/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
 import CoreLocation
 
 struct PointData {

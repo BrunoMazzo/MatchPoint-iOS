@@ -1,9 +1,9 @@
 {
-  "commitish" : "v4.3.0",
-  "iOS" : [
+  "commitish" : "v5.0.0",
+  "watchOS" : [
     {
       "name" : "SwiftyAttributes",
-      "hash" : "e0dccbfd91aadfa6799ce38584af1ff86dcaf5ccdd77822caa0cb234d4f1a778"
+      "hash" : "cb6d4bfe51c32692d7195d1735c83469293b567dce1a749d5e2ef3ea760ae269"
     }
   ]
 }

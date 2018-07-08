@@ -17,16 +17,16 @@ struct TimeCard: Mappable {
     let originalAddress: String?
     let locationEdited: Bool?
     let accuracy: Int?
-    
+
     private enum CodingKeys: String, CodingKey {
-        case latitude = "latitude"
-        case longitude = "longitude"
-        case address = "address"
+        case latitude
+        case longitude
+        case address
         case referenceId = "reference_id"
-        case originalLatitude = "originalLatitude"
-        case originalLongitude = "originalLongitude"
-        case originalAddress = "originalAddress"
-        case locationEdited = "locationEdited"
-        case accuracy = "accuracy"
+        case originalLatitude
+        case originalLongitude
+        case originalAddress
+        case locationEdited
+        case accuracy
     }
 }

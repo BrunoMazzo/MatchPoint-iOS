@@ -1,11 +1,3 @@
-//
-//  UIButton+Designable.swift
-//  Doom Coop
-//
-//  Created by Lucas Salton Cardinali on 16/10/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
 import UIKit
 
 @IBDesignable extension UIButton {
@@ -17,7 +9,7 @@ import UIKit
             return layer.borderWidth
         }
     }
-    
+
     @IBInspectable var cornerRadius: CGFloat {
         set {
             layer.cornerRadius = newValue
@@ -26,7 +18,7 @@ import UIKit
             return layer.cornerRadius
         }
     }
-    
+
     @IBInspectable var borderColor: UIColor? {
         set {
             guard let uiColor = newValue else { return }

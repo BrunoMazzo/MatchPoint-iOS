@@ -1,11 +1,3 @@
-//
-//  PontoMaisAPI.swift
-//  PontoConcrete
-//
-//  Created by Douglas Medeiros on 15/11/17.
-//  Copyright © 2017 Lucas Salton Cardinali. All rights reserved.
-//
-
 import Foundation
 import Moya
 import Result
@@ -13,14 +5,14 @@ import Result
 protocol IPontoMaisAPI {
     typealias LoginCompletion = (_ response: LoginResponse?, _ result: Result<Moya.Response, MoyaError>) -> Void
     typealias RegisterCompletion = (_ response: RegisterResponse?, _ result: Result<Moya.Response, MoyaError>) -> Void
-    
+
     func login(email: String, password: String, callback: @escaping LoginCompletion) -> Cancellable
     func register(credentials: SessionData, point: PointData, callback: @escaping RegisterCompletion) -> Cancellable
 }
 
 class PontoMaisAPI: NSObject {
     let provider: MoyaProvider<PontoMaisRoute>
-    
+
     init(provider: MoyaProvider<PontoMaisRoute> = MoyaProvider<PontoMaisRoute>()) {
         self.provider = provider
     }
@@ -42,10 +34,10 @@ extension PontoMaisAPI: IPontoMaisAPI {
             }
         }
     }
-    
+
     @discardableResult
     func login(email: String, password: String, callback: @escaping IPontoMaisAPI.LoginCompletion) -> Cancellable {
-        return provider.request(.login(login: email, password: password)) { result in
+        return self.provider.request(.login(login: email, password: password)) { result in
             switch result {
             case let .success(response):
                 guard let responseString = String(data: response.data, encoding: .utf8) else {
